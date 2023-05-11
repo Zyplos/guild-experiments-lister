@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guild Experiments Lister</title>
+    <style>
+      /* some default styles that look good */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: sans-serif;
+        background-color: #36393f;
+        color: white;
+        padding: 1rem 2rem;
+      }
+      a {
+        color: #ff3e3e;
+      }
+    </style>
+    <style>
+      .hidden {
+        display: none !important;
+      }
+      .feature-chip {
+        display: inline-block;
+        padding: 0.5rem;
+        margin: 0.5rem;
+        border-radius: 0.5rem;
+        background-color: #5865f2;
+        color: white;
+        cursor: pointer;
+      }
+
+      .feature-chip.active {
+        background-color: #ff3e3e;
+        color: #fff;
+      }
+
+      #login-button {
+        background-color: #5865f2;
+        color: white;
+        border: none;
+        border-radius: 0.5rem;
+        padding: 1.3rem 3rem;
+        cursor: pointer;
+        font-size: 1.7rem;
+      }
+
+      main {
+        margin-bottom: 2rem;
+        flex-grow: 1;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        flex-direction: column;
+        display: flex;
+      }
+
+      footer p {
+        opacity: 0.5;
+        font-size: 0.75rem;
+      }
+
+      #search-box {
+        background-color: #1b1e22;
+        border: none;
+        border-radius: 0.5rem;
+        padding: 0.5rem 1rem;
+        color: white;
+        font-size: 1rem;
+        width: 100%;
+        margin-bottom: 1rem;
+      }
+
+      @media screen and (min-width: 1000px) {
+        #signed-in-screen {
+          display: flex;
+        }
+
+        #search-container {
+          width: 30%;
+        }
+
+        #guilds-container {
+          width: 70%;
+        }
+      }
+
+      #guilds-container {
+        padding: 0rem 3rem;
+      }
+    </style>
+    <style>
+      /* spinner styles */
+      .spinner-icon {
+        position: relative;
+        width: 80px;
+        height: 80px;
+      }
+      .spinner-icon div {
+        display: inline-block;
+        position: absolute;
+        left: 8px;
+        width: 16px;
+        background: #fff;
+        animation: spinner-icon 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+      }
+      .spinner-icon div:nth-child(1) {
+        left: 8px;
+        animation-delay: -0.24s;
+      }
+      .spinner-icon div:nth-child(2) {
+        left: 32px;
+        animation-delay: -0.12s;
+      }
+      .spinner-icon div:nth-child(3) {
+        left: 56px;
+        animation-delay: 0;
+      }
+      @keyframes spinner-icon {
+        0% {
+          top: 8px;
+          height: 64px;
+        }
+        50%,
+        100% {
+          top: 24px;
+          height: 32px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <h1>Guild Experiments Lister</h1>
+
+      <div id="not-signed-in-screen">
+        <p>This is a tool to list all the experiments that are currently running on your guild.</p>
+        <button id="login-button" class="hidden">Login with Discord</button>
+      </div>
+      <div id="signed-in-screen" class="hidden">
+        <div id="search-container">
+          <p>
+            Click on the features below to filter guilds or type a feature name in the search box. Click on an active
+            feature button to view all guilds again.
+          </p>
+          <div id="filter-container">
+            <input type="text" id="search-box" placeholder="Search by feature" />
+            <div id="features-container"></div>
+          </div>
+        </div>
+        <div id="guilds-container"></div>
+      </div>
+      <div class="spinner-icon">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </main>
+    <footer>
+      <p>Written with ChatGPT (minimal edits and styling by <a href="https://zyplos.dev">me</a>)</p>
+    </footer>
+
+    <script src="./main.js"></script>
+  </body>
+</html>
