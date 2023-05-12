@@ -1,4 +1,5 @@
-import { CLIENT_ID, REDIRECT_URI } from "env";
+const CLIENT_ID = process.env.CLIENT_ID;
+const REDIRECT_URI = process.env.REDIRECT_URI;
 
 const spinnerElement = document.querySelector(".spinner-icon");
 const notSignedInElement = document.getElementById("not-signed-in-screen");

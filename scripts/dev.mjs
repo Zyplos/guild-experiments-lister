@@ -1,7 +1,14 @@
 import * as esbuild from "esbuild";
 import * as fs from "fs/promises";
-import envFilePlugin from "esbuild-envfile-plugin";
 import http from "http";
+
+import * as dotenv from "dotenv";
+dotenv.config();
+const CLIENT_ID = process.env.CLIENT_ID;
+const REDIRECT_URI = process.env.REDIRECT_URI;
+if (!CLIENT_ID || !REDIRECT_URI) {
+  throw new Error("CLIENT_ID or REDIRECT_URI not set in .env file");
+}
 
 const copyFilePlugin = {
   name: "copy-file-plugin",
@@ -17,9 +24,11 @@ let ctx = await esbuild.context({
   entryPoints: ["src/main.js"],
   bundle: true,
   outdir: "dist",
-  plugins: [envFilePlugin, copyFilePlugin],
+  plugins: [copyFilePlugin],
   define: {
     "window.IS_PRODUCTION": "false",
+    "process.env.CLIENT_ID": `"${CLIENT_ID}"`,
+    "process.env.REDIRECT_URI": `"${REDIRECT_URI}"`,
   },
 });
 await ctx.watch();
