@@ -20,7 +20,8 @@
         padding: 1rem 2rem;
       }
       a {
-        color: #ff3e3e;
+        color: white;
+        text-decoration: underline;
       }
     </style>
     <style>
@@ -50,6 +51,8 @@
         padding: 1.3rem 3rem;
         cursor: pointer;
         font-size: 1.7rem;
+        display: inline-block;
+        text-decoration: none;
       }
 
       main {
@@ -99,6 +102,72 @@
       #guilds-container {
         padding: 0rem 3rem;
       }
+
+      .guild-info {
+        background-color: #1b1e22;
+        border-radius: 0.5rem;
+        padding: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .permissions-tag {
+        background-color: #ff3e3e;
+        color: white;
+        padding: 0.2rem 0.5rem;
+        margin-left: 0.75rem;
+        border-radius: 0.3rem;
+        font-size: 0.7rem;
+      }
+
+      h2 {
+        display: flex;
+        align-items: center;
+        margin-top: 0;
+      }
+
+      img {
+        border-radius: 100%;
+        width: 128px;
+        height: 128px;
+      }
+
+      @media screen and (min-width: 800px) {
+        .guild-info-features-container {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+          grid-gap: 1rem;
+        }
+      }
+
+      #profile-image {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        cursor: pointer;
+        width: 48px;
+        height: 48px;
+      }
+
+      #profile-popup {
+        display: none;
+        position: absolute;
+        top: 5.5rem;
+        right: 1.5rem;
+        padding: 2rem 2.5rem;
+        background-color: #21252d;
+        border-radius: 0.5rem;
+      }
+
+      #logout-button {
+        background-color: #ff3e3e;
+        color: white;
+        border: none;
+        border-radius: 0.5rem;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        display: block;
+        margin-top: 1rem;
+      }
     </style>
     <style>
       /* spinner styles */
@@ -145,9 +214,26 @@
     <main>
       <h1>Guild Experiments Lister</h1>
 
+      <div id="profile-container" class="hidden">
+        <img src="./unknown-icon.png" alt="Your Profile Picture" id="profile-image" />
+        <div id="profile-popup">
+          <span id="username"></span>
+          <button id="logout-button">Logout</button>
+        </div>
+      </div>
+
       <div id="not-signed-in-screen">
-        <p>This is a tool to list all the experiments that are currently running on your guild.</p>
-        <button id="login-button" class="hidden">Login with Discord</button>
+        <p>Discord tends to test beta features by randomly enrolling some servers into "experiments."</p>
+        <p>This tool grabs all the servers you're in and lists what features each server has.</p>
+        <p>
+          If you want to play around with some experimental features, this tool is an easy way to filter through all the
+          servers you're in for certain features.
+        </p>
+        <p>
+          All data fetching happens here on the page, no data is saved anywhere. The code for this site can be found on
+          <a href="https://github.com/Zyplos/guild-experiments-lister">GitHub</a>.
+        </p>
+        <a id="login-button" class="hidden" href="">Login with Discord</a>
       </div>
       <div id="signed-in-screen" class="hidden">
         <div id="search-container">
